@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 // user routes link
-// router.use('/user', require('./user'));
+router.use('/user', require('./user'));
 
-// get all tasks
-router.get('/', (req,res) => {
-    return res.send("<h1>Hello</h1>");
-});
+// products
+router.use('/product', require('./product'));
+
+// orders
+router.use('/order', require('./order'));
 
 module.exports = router;
