@@ -42,7 +42,7 @@ const SignIn = () => {
           total: orders.total
         }
         dispatch(getProducts(payload))
-        alert(res.data.msg);
+        await alert(res.data.msg);
         navigate("/");
         return;
       }

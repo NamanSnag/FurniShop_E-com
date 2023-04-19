@@ -35,6 +35,7 @@ const Rigester = () => {
       alert("Error: " + error);
       return error;
     }
+    await alert("If you want to become a admin, email me");
     navigate("/login");
   };
 

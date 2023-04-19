@@ -2,10 +2,24 @@ import React from "react";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 
 import "./style.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeProduct } from "../../redux/cart";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+ const handleDelete = (e, index, price, quantity) => {
+  e.preventDefault();
+  const newProducts = cart.products.filter((product, i) => i !== index);
+  const payload = {
+    products: newProducts,
+    price: price,
+    quantity: quantity,
+  };
+  dispatch(removeProduct(payload));
+};
 
   return (
     <div className="cart">
@@ -16,10 +30,7 @@ const Cart = () => {
           {cart.products.map((product, i) => {
             return (
               <div className="cart__product" key={i}>
-                <img
-                  src={product.product.image}
-                  alt="oooo"
-                />
+                <img src={product.product.image} alt="oooo" />
                 <div className="cart__productDetail">
                   <h4>{product.product.name}</h4>
                   <p>Rs. {product.product.price}</p>
@@ -30,7 +41,19 @@ const Cart = () => {
                     <button className="span">Qty : {product.quantity}</button>
                     <AiOutlinePlusSquare className="quantityBtn" />
                   </div>
-                  <button className="cart__deleteBtn">Delete</button>
+                  <button
+                    className="cart__deleteBtn"
+                    onClick={(e) =>
+                      handleDelete(
+                        e,
+                        i,
+                        product.product.price,
+                        product.quantity
+                      )
+                    }
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             );

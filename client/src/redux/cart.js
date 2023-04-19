@@ -15,9 +15,7 @@ const cartSlice = createSlice({
     },
     removeProduct: (state, action) => {
       state.quantity -= 1;
-      state.products = state.products.filter(
-        (product) => product._id !== action.payload
-      );
+      state.products = action.payload.products;
       state.total -= action.payload.price * action.payload.quantity;
     },
     getProducts: (state, action) => {
